@@ -10,6 +10,8 @@
 
 namespace dwrite_fonts {
 
+	const std::string kVersionInfo = "1.0.0";
+
 	constexpr HRESULT kErrorExtractingLocalizedStringsFailed =
 
 		MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0xD102);
@@ -33,8 +35,8 @@ namespace dwrite_fonts {
 		HRESULT exit_hresult{ S_OK };
 	};
 
-	std::string utf8_encode(const std::wstring& wstr);
-	std::wstring utf8_decode(const std::string& str);
+	std::string utf8Encode(const std::wstring& wstr);
+	std::wstring utf8Decode(const std::string& str);
 	IDWriteFactory* createFactory();
 	std::optional<std::string> GetLocalizedString(IDWriteLocalizedStrings* names, const std::string& locale);
 	std::optional<std::string> GetNativeString(IDWriteLocalizedStrings* names);

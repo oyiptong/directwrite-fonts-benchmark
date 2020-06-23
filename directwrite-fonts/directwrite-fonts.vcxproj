@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\directwrite-fonts-benchmark\packages\cxxopts.2.2.0\build\native\cxxopts.props" Condition="Exists('..\directwrite-fonts-benchmark\packages\cxxopts.2.2.0\build\native\cxxopts.props')" />
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -166,11 +167,14 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="..\directwrite-fonts-benchmark\packages\nlohmann.json.3.7.3\build\native\nlohmann.json.targets" Condition="Exists('..\directwrite-fonts-benchmark\packages\nlohmann.json.3.7.3\build\native\nlohmann.json.targets')" />
+    <Import Project="..\directwrite-fonts-benchmark\packages\cxxopts.2.2.0\build\native\cxxopts.targets" Condition="Exists('..\directwrite-fonts-benchmark\packages\cxxopts.2.2.0\build\native\cxxopts.targets')" />
   </ImportGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\directwrite-fonts-benchmark\packages\nlohmann.json.3.7.3\build\native\nlohmann.json.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\directwrite-fonts-benchmark\packages\nlohmann.json.3.7.3\build\native\nlohmann.json.targets'))" />
+    <Error Condition="!Exists('..\directwrite-fonts-benchmark\packages\cxxopts.2.2.0\build\native\cxxopts.props')" Text="$([System.String]::Format('$(ErrorText)', '..\directwrite-fonts-benchmark\packages\cxxopts.2.2.0\build\native\cxxopts.props'))" />
+    <Error Condition="!Exists('..\directwrite-fonts-benchmark\packages\cxxopts.2.2.0\build\native\cxxopts.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\directwrite-fonts-benchmark\packages\cxxopts.2.2.0\build\native\cxxopts.targets'))" />
   </Target>
 </Project>

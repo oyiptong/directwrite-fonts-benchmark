@@ -1,21 +1,24 @@
 #include "directwrite-fonts.h"
 
+
 namespace dwrite_fonts {
 
-	// Convert a wide Unicode string to an UTF8 string
-	std::string utf8_encode(const std::wstring& wstr)
-	{
-		if (wstr.empty()) return std::string();
+	// Convert a wide string to a string.
+	std::string utf8Encode(const std::wstring& wstr) {
+		if (wstr.empty())
+			return std::string();
+		// win32 API to convert a wstring to string: https://docs.microsoft.com/en-us/windows/win32/api/stringapiset/nf-stringapiset-widechartomultibyte
 		int size_needed = WideCharToMultiByte(CP_UTF8, 0, &wstr[0], (int)wstr.size(), NULL, 0, NULL, NULL);
 		std::string strTo(size_needed, 0);
 		WideCharToMultiByte(CP_UTF8, 0, &wstr[0], (int)wstr.size(), &strTo[0], size_needed, NULL, NULL);
 		return strTo;
 	}
 
-	// Convert an UTF8 string to a wide Unicode String
-	std::wstring utf8_decode(const std::string& str)
-	{
-		if (str.empty()) return std::wstring();
+	// Convert a string to a wide string.
+	std::wstring utf8Decode(const std::string& str) {
+		if (str.empty())
+			return std::wstring();
+		// win32 API to convert a string to a wstring: https://docs.microsoft.com/en-us/windows/win32/api/stringapiset/nf-stringapiset-multibytetowidechar
 		int size_needed = MultiByteToWideChar(CP_UTF8, 0, &str[0], (int)str.size(), NULL, 0);
 		std::wstring wstrTo(size_needed, 0);
 		MultiByteToWideChar(CP_UTF8, 0, &str[0], (int)str.size(), &wstrTo[0], size_needed);
@@ -38,7 +41,7 @@ namespace dwrite_fonts {
 
 
 	std::optional<std::string> GetLocalizedString(IDWriteLocalizedStrings* names, const std::string& locale) {
-		std::wstring locale_wide = utf8_decode(locale);
+		std::wstring locale_wide = utf8Decode(locale);
 
 		// If locale is empty, index 0 will be used. Otherwise, the locale name must
 		// be found and must exist.
@@ -65,7 +68,7 @@ namespace dwrite_fonts {
 		// Shrink the string to fit the actual length.
 		buffer.resize(length);
 
-		return utf8_encode(buffer);
+		return utf8Encode(buffer);
 	}
 
 
